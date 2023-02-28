@@ -1,0 +1,140 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{comment}
+\usepackage{tabu}
+\usepackage{xstring}
+\usepackage{etoolbox}
+\usepackage[backend=bibtex,defernumbers=true,sorting=ydnt,style=authoryear,doi=true,maxnames=99,url=true]{biblatex}
+\usepackage{calc}
+\usepackage{microtype}
+\usepackage{hyphenat}
+\usepackage{changepage}
+\usepackage{multicol}
+\usepackage{xspace}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[]{xcolor}
+\usepackage{setspace}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black,
+  pdfauthor=author,
+}
+
+% Remove indent spacing
+\setlength{\parindent}{0in}
+
+% Define some filters for convenience
+\defbibfilter{other}{
+  type=report or
+  type=thesis
+}
+
+\defbibfilter{invited}{
+  type=incollection and
+  keyword=invited
+}
+
+\defbibfilter{talk}{
+  type=incollection and
+  not keyword=invited
+}
+
+\addbibresource{ref.bib}
+
+% Bold names of students
+\newboolean{bold}
+\newcommand{\makeauthorsbold}[1]{%
+  \DeclareNameFormat{author}{%
+  \setboolean{bold}{false}%
+    \renewcommand{\do}[1]{\expandafter\ifstrequal\expandafter{\namepartfamily}{####1}{\setboolean{bold}{true}}{}}%
+    \docsvlist{#1}%
+    \ifthenelse{\value{listcount}=1}
+    {%
+     {\expandafter\ifthenelse{\boolean{bold}}{\mkbibbold{\namepartfamily\addcomma\addspace \namepartgiveni}}{\namepartfamily\addcomma\addspace \namepartgiveni}}%
+    }{\ifnumless{\value{listcount}}{\value{liststop}}
+      {\expandafter\ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}%
+      {\expandafter\ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}%
+      }
+    \ifthenelse{\value{listcount}<\value{liststop}}
+    {\addcomma\space}{}
+  }
+}
+
+% Get reverse numbering for entries
+\makeatletter
+\patchcmd{\blx@printbibliography}
+  {\blx@bibliography\blx@tempa}
+  {\setcounter{bibitemtotal}{0}%
+   \begingroup
+   \def\do##1{\stepcounter{bibitemtotal}}%
+   \dolistloop{\blx@tempa}%
+   \endgroup
+   \blx@bibliography\blx@tempa}{}{}
+\makeatother
+
+\newcounter{bibitemtotal}
+\newrobustcmd*{\mkbibdesc}[1]{%
+  \number\numexpr\value{bibitemtotal}+1-#1\relax}
+\DeclareFieldFormat{labelnumber}{\mkbibdesc{#1}}
+\DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}}
+
+\defbibenvironment{bibliography}
+  {\list
+     {\printtext[labelnumberwidth]{\printfield{labelprefix}\printfield{labelnumber}}}
+     {}%
+      \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
+
+% Set spacing in itemize
+\setlist{itemsep=3pt,topsep=3pt,parsep=0pt,partopsep=0pt} 
+
+% Set spacing around titles (syntax: spacing left, before, after)
+\usepackage{titlesec}
+\titlespacing*{\section}
+{0pt}{6pt}{6pt}
+\titlespacing*{\subsection}
+{0pt}{6pt}{6pt}
+
+% Header/footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{\today}
+\chead{}
+\rhead{}
+\cfoot{}
+\rfoot{\thepage}
+\cfoot{}
+\lfoot{}
+
+% Table of contents
+\usepackage{titletoc}
+\setcounter{tocdepth}{2}
+\renewcommand{\contentsname}{\Large Table of Contents}
+
+% Use Gatech-required section number schemes
+\renewcommand{\thesection}{\Roman{section}.} 
+\renewcommand{\thesubsection}{\Alph{subsection}.}
+\renewcommand{\thesubsubsection}{\Alph{subsection}\arabic{subsubsection}.}
+
+% Make TOC a bit nicer
+\makeatletter
+\renewcommand{\l@section}{\@dottedtocline{1}{1.5em}{2.4em}}
+\renewcommand{\l@subsection}{\@dottedtocline{2}{3.0em}{2.4em}}
+\renewcommand{\l@subsubsection}{\@dottedtocline{3}{7.4em}{4.5em}}
+\makeatother
+
+% Allow for an asterisk before a bib entry
+\makeatletter
+\providecommand{\bib@extsym}{}
+\DeclareEntryOption[string]{extsym}{\renewcommand{\bib@extsym}{#1}}
+\renewbibmacro*{begentry}{\printtext{\bib@extsym\xspace}}
+\makeatother
+
