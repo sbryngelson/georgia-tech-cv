@@ -3,6 +3,7 @@
 This is an __unofficial__ LaTeX CV template that closely follows [Georgia Tech's CV template]((https://faculty.gatech.edu/current-faculty/promotion-tenure)) required for reappointment, promotion, and tenure of academic faculty. 
 The official template is only available in MS Word, hence this __unofficial__ repository.
 It closely matches the official one at time of writing (March 2023).
+__Note: This CV template is not useful for Gatech students.__
 
 Submit a PR to improve if needed.
 
