@@ -4,7 +4,8 @@ This is an __unofficial__ LaTeX CV template that closely follows [Georgia Tech's
 The official template is only available in MS Word, hence this __unofficial__ repository.
 It closely matches the official one at the following timestamps:
  * March 2023
- * March 2024 still up to date, now includes the newly required PDF table of contents/bookmarks
+ * March 2024: Still up to date, now includes the newly required PDF table of contents/bookmarks
+ * May 2024: Updated to fix asterisk from items before Gatech to during Gatech
 
 __Note: This CV template is not useful for Gatech students.__
 
@@ -21,8 +22,8 @@ This makes them bold everywhere in the document, which is required per the exist
 Here is an example:
 https://github.com/sbryngelson/georgia-tech-cv/blob/e34f48d7b35bd5f5b3c493c16ff83ae72245d158/cv.tex#L7
 
-2. __Gatech wants asterisks in front of items that occurred before you joined Gatech__.    
-Accomplished this by, in `ref.bib`, use `options = {extsym={*}}` for all items that occured _before_ you joined Georgia Tech.
+2. __Gatech wants asterisks in front of items that occurred during your time at Gatech__.    
+Accomplished this by, in `ref.bib`, using `options = {extsym={*}}` for all items that occurred _while_ you were at Georgia Tech.
 Here is an example:
 https://github.com/sbryngelson/georgia-tech-cv/blob/e34f48d7b35bd5f5b3c493c16ff83ae72245d158/ref.bib#L72-L78
 
@@ -37,7 +38,7 @@ You can change this as appropriate for your case.
 ### Maintain a single `.bib` file for your CV and website
 
 The same `biblatex` + `ref.bib` configuration can be used with Jekyll Scholar for maintaining _one_ `.bib` file for your CV _and_ your website.
-I do this for my research group [here](https://github.com/comp-physics/comp-physics.github.io) and the corresponding template is [here](https://github.com/sbryngelson/academic-website-template).
+I do this for my research group [here](https://github.com/comp-physics/comp-physics.github.io), and the corresponding template is [here](https://github.com/sbryngelson/academic-website-template).
 
 ### License
 
