@@ -4,8 +4,9 @@ This is an __unofficial__ LaTeX CV template that closely follows [Georgia Tech's
 The official template is only available in MS Word, hence this __unofficial__ repository.
 It closely matches the official one at the following timestamps:
  * March 2023
- * March 2024: Still up to date, now includes the newly required PDF table of contents/bookmarks
- * May 2024: Updated to fix asterisk from items before Gatech to during Gatech
+ * March 2024: Added newly required PDF table of contents/bookmarks
+ * May 2024: Fixed asterisk convention (marks GT-era items, not pre-GT)
+ * April 2026: Switched to biber backend, added Makefile/latexmkrc build system, added macros for identity/grants/students, fixed extsym persistence bug, added candidate name underlining, added missing Section V.B4 (postdoc mentorship), cleaned up unused packages, added csquotes, improved README documentation
 
 __Note: This CV template is not useful for Gatech students.__
 
