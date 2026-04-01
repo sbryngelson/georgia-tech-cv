@@ -1,10 +1,27 @@
 % !TEX root = ./cv.tex
-%!TEX TS-program = pdflatex
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+% !BIB TS-program = biber
+
+% Source - https://github.com/sbryngelson/georgia-tech-cv
+% License - MIT
+
+\documentclass[11pt]{article}
 
 \input{preamble.tex}
 
-% Put your students' last names here! (it will make them bold, per GT-requirements)
+% Set your identity (used in header, PDF metadata, and bibliography formatting)
+\renewcommand{\myname}{Your Name}
+\renewcommand{\mytitle}{Title}
+\renewcommand{\myschool}{School of X}
+\renewcommand{\mycollege}{College of Y}
+\renewcommand{\mylastname}{Bryngelson}
+
+% Put your students' last names here (makes them bold, per GT requirements)
 \makeauthorsbold{Le Berre, Radhakrishnan, Zeng, Kothari, Arias, Bati, Chrit, Kocherla}
+\makeauthorunderline{\mylastname}
+
+
 
 \begin{document}
 
@@ -16,9 +33,9 @@
 
 \setcounter{page}{1}
 \begin{center}
-    {\Large \bf Your Name}  \smallskip \\
-    {\large Title} \\
-    {\large School}  
+    {\Large \bf \myname}  \smallskip \\
+    {\large \mytitle} \\
+    {\large \myschool}
 \end{center}
 
 \section{Earned Degrees}
@@ -27,8 +44,8 @@
 \begin{itemize}
     \item University of Y
     \begin{itemize}
-        \item[] (2017) Doctor of Philosophy, Degree Name Here
-        \item[] (2015) Master of Science, Degree Name Here
+        \item[] (2017) Doctor of Philosophy, Degree Name Here; Advisor: Prof.\ Name Here
+        \item[] (2015) Master of Science, Degree Name Here; Advisor: Prof.\ Name Here
     \end{itemize}
     \item University of X
     \begin{itemize}
@@ -42,8 +59,8 @@
 \begin{adjustwidth}{2em}{0pt}
 
 \begin{itemize}
-    \item (2021--Present) Your Title Here, School of Y, College of X, Georgia Institute of Technology
-    \item (2018--21) Postdoctoral Scholar, University of Y
+    \item (2021--Present) \mytitle, \myschool, \mycollege, Georgia Institute of Technology
+    \item (2018--21) Postdoctoral Scholar, University of Y; Advisor: Prof.\ Name Here
     \item (2013--17) Graduate Research Assistant, University of X 
 \end{itemize}
 
@@ -63,6 +80,8 @@
 \section{Research, Scholarship, and Creative Activities}
 \begin{adjustwidth}{2em}{0pt}
 
+\textbf{Key:} * = work done at Georgia Tech; \textbf{bold} = student/postdoc co-author; \underline{underline} = candidate.
+
 \subsection{Published Books, Book Chapters, and Edited Volumes}
 
 \subsubsection{Books}
@@ -76,30 +95,39 @@ No data.
 
 \subsection{Refereed Publications and Submitted Articles}
 
+% Note: \nocite{*} includes ALL entries from ref.bib. If you share this .bib
+% file with other projects (e.g., a website), ensure it only contains CV entries,
+% or replace \nocite{*} with explicit \nocite{key1,key2,...} calls.
 \nocite{*}
 
 \subsubsection{Published and Accepted Journal Articles}
+% Auto-populated from @article entries in ref.bib
 
 \newrefcontext[labelprefix=J]
 \printbibliography[type=article,resetnumbers=true,heading=none]
 
 \subsubsection{Conference Presentation with Proceedings (Refereed)}
+% Auto-populated from @inproceedings entries in ref.bib
 
 \newrefcontext[labelprefix=P]
 \printbibliography[type=inproceedings,resetnumbers=true,heading=none]
 
 \subsubsection{Other Refereed Material}
+% Auto-populated from @report and @thesis entries in ref.bib
 
 \newrefcontext[labelprefix=O]
 \printbibliography[resetnumbers=true,filter=other,heading=none]
 
 \subsubsection{Submitted Journal Articles (with Date of Submission)}
+% Auto-populated from @unpublished entries in ref.bib
+
 \newrefcontext[labelprefix=U]
 \printbibliography[type=unpublished,resetnumbers=true,heading=none]
 
 \subsection{Other Publications and Creative Products}
 
 \subsubsection{Software}
+% Auto-populated from @software entries in ref.bib
 
 \newrefcontext[labelprefix=S]
 \printbibliography[type=software,resetnumbers=true,heading=none]
@@ -107,10 +135,14 @@ No data.
 \subsection{Presentations}
 
 \subsubsection{Invited talks}
+% Auto-populated from @incollection entries with keywords = "invited" in ref.bib
+
 \newrefcontext[labelprefix=I]
 \printbibliography[resetnumbers=true,filter=invited,heading=none]
 
 \subsubsection{Conference presentations}
+% Auto-populated from @incollection entries without "invited" keyword in ref.bib
+
 \newrefcontext[labelprefix=T]
 \printbibliography[resetnumbers=true,filter=talk,heading=none]
 
@@ -118,74 +150,64 @@ No data.
 
 \subsubsection{As Principal Investigator}
 
-\begin{itemize}
-    \item 
-    Title of Project: \\ 
-    Agency/Company: \\ 
-    Total Dollar Amount:  \\ 
-    Role: co-PI or PI \\ 
-    Collaborators: Georgette Burdell (PI), Jane Doe (co-PI), John Doe (co-PI) \\ 
-    Period of Contract: 7/1/2008 – 6/31/2010 \\ 
-    Candidate’s Share: ~25\% (\$250K)
-\end{itemize}
+% Usage: \grantentry{title}{agency}{amount}{role}{collaborators}{period}{share}
+% Use \$  for dollar signs, $\sim$ for approx symbol, \% for percent
+\grantentry
+    {Project title here}
+    {Agency name here}
+    {\$500K}
+    {PI}
+    {Georgette Burdell (PI), Jane Doe (co-PI), John Doe (co-PI)}
+    {7/1/2008 -- 6/30/2010}
+    {$\sim$25\% (\$250K)}
 
 \subsubsection{As Co-Principal Investigator}
 
-\begin{itemize}
-    \item 
-    Title of Project: \\ 
-    Agency/Company: \\ 
-    Total Dollar Amount:  \\ 
-    Role: co-PI or PI \\ 
-    Collaborators: Georgette Burdell (PI), Jane Doe (co-PI), John Doe (co-PI) \\ 
-    Period of Contract: 7/1/2008 – 6/31/2010 \\ 
-    Candidate’s Share: ~25\% (\$250K)
-\end{itemize}
+\grantentry
+    {Project title here}
+    {Agency name here}
+    {\$500K}
+    {co-PI}
+    {Georgette Burdell (PI), Jane Doe (co-PI), John Doe (co-PI)}
+    {7/1/2008 -- 6/30/2010}
+    {$\sim$25\% (\$250K)}
 
 \subsubsection{As Senior Personnel or Contributor}
 
-\begin{itemize}
-    \item 
-    Title of Project: \\ 
-    Agency/Company: \\ 
-    Total Dollar Amount:  \\ 
-    Role: co-PI or PI \\ 
-    Collaborators: Georgette Burdell (PI), Jane Doe (co-PI), John Doe (co-PI) \\ 
-    Period of Contract: 7/1/2008 – 6/31/2010 \\ 
-    Candidate’s Share: ~25\% (\$250K)
-\end{itemize}
+\grantentry
+    {Project title here}
+    {Agency name here}
+    {\$500K}
+    {Senior Personnel}
+    {Georgette Burdell (PI), Jane Doe (co-PI), John Doe (co-PI)}
+    {7/1/2008 -- 6/30/2010}
+    {$\sim$25\% (\$250K)}
 
 \subsubsection{Pending Proposals}
 
-\begin{itemize}
-    \item 
-    Title of Project: \\ 
-    Agency/Company: \\ 
-    Total Dollar Amount:  \\ 
-    Role: co-PI or PI \\ 
-    Collaborators: Georgette Burdell (PI), Jane Doe (co-PI), John Doe (co-PI) \\ 
-    Period of Contract: 7/1/2008 – 6/31/2010 \\ 
-    Candidate’s Share: ~25\% (\$250K)
-\end{itemize}
+\grantentry
+    {Project title here}
+    {Agency name here}
+    {\$500K}
+    {PI}
+    {Georgette Burdell (PI), Jane Doe (co-PI), John Doe (co-PI)}
+    {7/1/2008 -- 6/30/2010}
+    {$\sim$25\% (\$250K)}
 
 \subsubsection{Proposals Submitted but Not Funded (Last Two years)}
 
-\begin{itemize}
-    \item 
-    Title of Project: \\ 
-    Agency/Company: \\ 
-    Total Dollar Amount:  \\ 
-    Role: co-PI or PI \\ 
-    Collaborators: Georgette Burdell (PI), Jane Doe (co-PI), John Doe (co-PI) \\ 
-    Period of Contract: 7/1/2008 – 6/31/2010 \\ 
-    Candidate’s Share: ~25\% (\$250K)
-\end{itemize}
-
-\end{adjustwidth}
+\grantentry
+    {Project title here}
+    {Agency name here}
+    {\$500K}
+    {PI}
+    {Georgette Burdell (PI), Jane Doe (co-PI), John Doe (co-PI)}
+    {7/1/2008 -- 6/30/2010}
+    {$\sim$25\% (\$250K)}
 
 \subsection{Other Scholarly and Creative Accomplishments}
 
-% List all other scholarly and creative accomplishments such as invention disclosures, start-up companies, etc. that are not listed elsewhere. 
+% List all other scholarly and creative accomplishments such as invention disclosures, start-up companies, etc. that are not listed elsewhere.
 
 No data.
 
@@ -196,6 +218,10 @@ No data.
 No data.
 
 \subsection{Other Professional Activities}
+
+No data.
+
+\end{adjustwidth}
 
 \section{Education}
 \begin{adjustwidth}{2em}{0pt}
@@ -214,28 +240,28 @@ No data.
 
 \subsection{Individual Student Guidance}
 
-% List all Postdoctoral Fellows, Ph.D. students, M.S. Thesis students, and undergraduate students supervised/advised.  Explicitly indicate any co-advisement relationships. For Ph.D. and M.S. Thesis students, include date of graduation and title of thesis and, if known, the current position of the graduate students.  For graduate students currently supervised, indicate the semester advisement began, their progression through appropriate exams, title of their project/dissertation, and current position if available.  Provide any indicators you have of the quality of your mentorship. 
+% List all Postdoctoral Fellows, Ph.D. students, M.S. Thesis students, and undergraduate students supervised/advised.
+% Explicitly indicate any co-advisement relationships.
+% For Ph.D. and M.S. Thesis students, include date of graduation and title of thesis and, if known, the current position of the graduate students.
+% For graduate students currently supervised, indicate the semester advisement began, their progression through appropriate exams, title of their project/dissertation, and current position if available.
+% Provide any indicators you have of the quality of your mentorship.
 
 \subsubsection{Ph.D.\ Students}
 
+% Usage: \phdstudent{name}{dept, co-advisor info}{dates}{project title}{progress}
 \begin{itemize}
-    \item 
-        John Doe \\ 
-        COC CSE, co-advised with X\\
-        Fall 2021--Present \\
-        Project: Project name here \\
-        Progress: Completed qualifying examination
-    \item More people go here\dots
+    \phdstudent{John Doe}{COC CSE, co-advised with X}{Fall 2021--Present}
+        {Project name here}{Completed qualifying examination}
+    \phdstudent{More people go here\dots}{}{}{}{} % remove this placeholder
 \end{itemize}
 
 \subsubsection{M.S.\ Students}
 
+% Usage: \msstudent{name}{dept, thesis/no-thesis}{dates}{project title}
 \begin{itemize}
-    \item Jane Doe \\
-        COC CSE, no-thesis \\
-        Fall 2022--Spring 2023 \\
-        Project: Project name here
-    \item More people go here\dots
+    \msstudent{Jane Doe}{COC CSE, no-thesis}{Fall 2022--Spring 2023}
+        {Project name here}
+    \msstudent{More people go here\dots}{}{}{} % remove this placeholder
 \end{itemize}
 
 \subsubsection{Undergraduate Students}
@@ -243,6 +269,12 @@ No data.
 \begin{itemize}
     \item Example Person (CS), 2021--Present
     \item More people here\dots
+\end{itemize}
+
+\subsubsection{Mentorship of Postdoctoral Fellows or Visiting Scholars}
+
+\begin{itemize}
+    \item Postdoc or visiting scholar name here, dates
 \end{itemize}
 
 \subsubsection{Service on Thesis or Dissertation Committees}
@@ -294,13 +326,13 @@ No data.
     \item (2023) Nice thing here 
 \end{itemize}
 
-\subsubsection{College of Y-level}
+\subsubsection{\mycollege level}
 
 \begin{itemize}
     \item (2023) Nice thing here 
 \end{itemize}
 
-\subsubsection{School of X-level}
+\subsubsection{\myschool level}
 
 \begin{itemize}
     \item (2023) Nice thing here 

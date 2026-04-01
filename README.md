@@ -1,6 +1,6 @@
 ## Georgia Tech CV Template
 
-This is an __unofficial__ LaTeX CV template that closely follows [Georgia Tech's CV template]((https://faculty.gatech.edu/current-faculty/promotion-tenure)) required for reappointment, promotion, and tenure of academic faculty. 
+This is an __unofficial__ LaTeX CV template that closely follows [Georgia Tech's CV template](https://faculty.gatech.edu/current-faculty/promotion-tenure) required for reappointment, promotion, and tenure of academic faculty. 
 The official template is only available in MS Word, hence this __unofficial__ repository.
 It closely matches the official one at the following timestamps:
  * March 2023
@@ -11,29 +11,70 @@ __Note: This CV template is not useful for Gatech students.__
 
 Submit a PR to improve if needed.
 
+### Building
+
+The simplest way to build the PDF:
+
+```bash
+make        # build cv.pdf
+make clean  # remove build artifacts
+make watch  # auto-rebuild on file changes (requires a PDF viewer)
+```
+
+This uses `latexmk`, which handles the `pdflatex` → `biber` → `pdflatex` cycle automatically.
+If you don't have `make`, you can run `latexmk` directly (the `.latexmkrc` configures everything).
+
+__Prerequisites:__ A TeX distribution (e.g., [TeX Live](https://www.tug.org/texlive/) or [MacTeX](https://www.tug.org/mactex/)) with `pdflatex`, `biber`, and `latexmk`.
+
 ### How to use
 
 Most of this is pretty straightforward.
-There are only a few hacks that you have to deal with.
+Start by setting your identity at the top of `cv.tex`:
+
+```latex
+\renewcommand{\myname}{Your Name}
+\renewcommand{\mytitle}{Assistant Professor}
+\renewcommand{\myschool}{School of CSE}
+\renewcommand{\mycollege}{College of Computing}
+\renewcommand{\mylastname}{YourLastName}
+```
+
+There are a few conventions to know:
 
 1. __Gatech wants your student's names in boldface__   
-Accomplish this by putting your students' last names in the `\makeauthorsbold{}` command at the top of `cv.tex`.
-This makes them bold everywhere in the document, which is required per the existing RPT template.
-Here is an example:
-https://github.com/sbryngelson/georgia-tech-cv/blob/e34f48d7b35bd5f5b3c493c16ff83ae72245d158/cv.tex#L7
+Put your students' last names in the `\makeauthorsbold{}` command at the top of `cv.tex`:
+    ```latex
+    \makeauthorsbold{Student1, Student2, Student3}
+    ```
 
-2. __Gatech wants asterisks in front of items that occurred during your time at Gatech__.    
-Accomplished this by, in `ref.bib`, using `options = {extsym={*}}` for all items that occurred _while_ you were at Georgia Tech.
-Here is an example:
-https://github.com/sbryngelson/georgia-tech-cv/blob/e34f48d7b35bd5f5b3c493c16ff83ae72245d158/ref.bib#L72-L78
+2. __Gatech wants asterisks in front of items that occurred during your time at Gatech__    
+In `ref.bib`, add `options = {extsym={*}}` to entries published _while_ at Georgia Tech:
+    ```bibtex
+    @incollection{conference_2,
+        author = {F. E. Chrit and S. H. Bryngelson},
+        title = {Some talk title},
+        note = {Conference Name},
+        year = {2022},
+        options = {extsym={*}},
+    }
+    ```
 
-3. __You'll probably want a clean way to maintain one `.bib` file for your entire CV (I do).__  
-To do this, while maintaining separation of different types of talks and publications maintain autosorting via `biblatex`.
-I used some keywords in `ref.bib` to this sorting:
-  * Add `keywords = "invited"` to an `@incollection{}` type to indicate an invited talk. 
-  * `@report{}` and `@thesis{}` types will go into section "B3. Other Refereed Material," which can be seen in this code snippet in `preamble.tex`
-https://github.com/sbryngelson/georgia-tech-cv/blob/e34f48d7b35bd5f5b3c493c16ff83ae72245d158/preamble.tex#L32-L36
-You can change this as appropriate for your case.
+3. __Your candidate name is underlined automatically__   
+This is controlled by `\makeauthorunderline{\mylastname}` at the top of `cv.tex`.
+
+4. __Maintain one `.bib` file for your entire CV__   
+Different `ref.bib` entry types map to different CV sections automatically:
+    | Entry type | CV section |
+    |---|---|
+    | `@article` | B1. Journal Articles |
+    | `@inproceedings` | B2. Conference Proceedings |
+    | `@report`, `@thesis` | B3. Other Refereed Material |
+    | `@unpublished` | B4. Submitted Articles |
+    | `@software` | C1. Software |
+    | `@incollection` + `keywords = "invited"` | D1. Invited Talks |
+    | `@incollection` (no keyword) | D2. Conference Presentations |
+
+    The filters are defined in `preamble.tex` and can be changed as needed.
 
 ### Maintain a single `.bib` file for your CV and website
 
