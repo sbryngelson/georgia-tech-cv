@@ -1,3 +1,8 @@
+[![GitHub release](https://img.shields.io/github/v/release/sbryngelson/georgia-tech-cv)](https://github.com/sbryngelson/georgia-tech-cv/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![LaTeX](https://img.shields.io/badge/Built%20with-LaTeX-008080.svg)](https://www.latex-project.org/)
+[![Open in Overleaf](https://img.shields.io/badge/Open%20in-Overleaf-47A141?logo=overleaf&logoColor=white)](https://www.overleaf.com/docs?snip_uri=https://github.com/sbryngelson/georgia-tech-cv/archive/refs/heads/main.zip)
+
 ## Georgia Tech CV Template
 
 This is an __unofficial__ LaTeX CV template that closely follows [Georgia Tech's CV template](https://faculty.gatech.edu/node/647) required for reappointment, promotion, and tenure of academic faculty. 
